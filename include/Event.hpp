@@ -5,11 +5,16 @@
 #ifndef CHIPAUDIO_EVENT_HPP
 #define CHIPAUDIO_EVENT_HPP
 
-enum EventType
+namespace chip
 {
-    NOTE_ON,
-    NOTE_OFF,
-    PARAM_CHANGE
-};
+
+    enum EventType
+    {
+        NOTE_ON,
+        NOTE_OFF,
+        PARAM_CHANGE
+    };
+
+}
 
 #endif //CHIPAUDIO_EVENT_HPP
