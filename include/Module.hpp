@@ -7,20 +7,23 @@
 
 #include <vector>
 
+namespace chip
+{
 /**
  * Abstract base class for modules.
  */
-class Module
-{
-public:
-    /**
-     * Override this method to define the behaviour of the module.
-     * @return Current output value of the module
-     */
-    virtual double output() = 0;
+    class Module
+    {
+    public:
+        /**
+         * Override this method to define the behaviour of the module.
+         * @return Current output value of the module
+         */
+        virtual double output() = 0;
 
-private:
-    std::vector<Module*> inputs;
-};
+    private:
+        std::vector<Module *> inputs;
+    };
+}
 
 #endif //CHIPAUDIO_MODULE_HPP
