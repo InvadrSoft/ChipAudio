@@ -10,17 +10,11 @@ namespace chip
     struct TimeSignature
     {
         /**
-         * Default constructor.
-         */
-        TimeSignature()
-                : beats(4), noteValue(4) {}
-
-        /**
-         * Non-default constructor.
+         * Constructs a TimeSignature, 4/4 by default.
          * @param _beats The number of beats in each bar
          * @param _noteValue The value of one beat
          */
-        TimeSignature(unsigned int _beats, unsigned int _noteValue)
+        TimeSignature(unsigned int _beats = 4, unsigned int _noteValue = 4)
                 : beats(_beats), noteValue(_noteValue) {}
 
         unsigned int beats;
