@@ -7,12 +7,15 @@
 
 namespace chip
 {
+    /**
+     * Struct representing a time signature.
+     */
     struct TimeSignature
     {
         /**
          * Constructs a TimeSignature, 4/4 by default.
-         * @param _beats The number of beats in each bar
-         * @param _noteValue The value of one beat
+         * @param _beats The number of beats in each bar (optional)
+         * @param _noteValue The value of one beat (optional)
          */
         TimeSignature(unsigned int _beats = 4, unsigned int _noteValue = 4)
                 : beats(_beats), noteValue(_noteValue) {}

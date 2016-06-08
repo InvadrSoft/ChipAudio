@@ -8,6 +8,9 @@
 namespace chip
 {
 
+    /**
+     * Enumeration of all event types.
+     */
     enum EventType
     {
         NOTE_ON,
