@@ -11,7 +11,7 @@ namespace chip
 {
 /**
  * Simple module that just stores a value and outputs it
- * when requested.
+ * when requested. No inputs.
  */
     class Value : public Module
     {
@@ -29,7 +29,7 @@ namespace chip
          * Constructs a Value, default value is 0.
          * @param _value Initial value (optional)
          */
-        Value(double _value = 0) : Module(), value(_value)
+        Value(double _value = 0) : Module(INPUTS_TOTAL), value(_value)
         {}
 
         /**

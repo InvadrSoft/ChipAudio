@@ -16,13 +16,26 @@ namespace chip
     {
     public:
         /**
+         * Construct module with specified number of inputs.
+         * @param _inputs No. of inputs
+         */
+        Module(unsigned int _inputs) : inputs(_inputs, nullptr) {}
+
+        /**
          * Override this method to define the behaviour of the module.
          * @return Current output value of the module
          */
         virtual double output() = 0;
 
+        /**
+         * Get input at given index (no bounds checking).
+         * @param _input Index of input
+         * @return Pointer to module at given index
+         */
+        Module*& input(unsigned int _input) { return inputs[_input]; }
+
     private:
-        std::vector<Module *> inputs;
+        std::vector<Module*> inputs;
     };
 }
 
