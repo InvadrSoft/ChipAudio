@@ -34,6 +34,8 @@ namespace chip
          */
         Module*& input(unsigned int _input) { return inputs[_input]; }
 
+        virtual ~Module() {}
+
     private:
         std::vector<Module*> inputs;
     };
