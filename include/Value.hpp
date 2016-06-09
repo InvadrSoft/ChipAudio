@@ -37,7 +37,7 @@ namespace chip
          * @param pattern Value to copy value from
          * @return Reference to this Value
          */
-        Value &operator=(Value &pattern)
+        Value& operator=(Value &pattern)
         {
             value = pattern.value;
             return *this;
@@ -48,7 +48,7 @@ namespace chip
          * @param newValue New value to be assigned
          * @return Reference to this Value
          */
-        Value &operator=(double newValue)
+        Value& operator=(double newValue)
         {
             value = newValue;
             return *this;
