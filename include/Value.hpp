@@ -9,10 +9,10 @@
 
 namespace chip
 {
-/**
- * Simple module that just stores a value and outputs it
- * when requested. No inputs.
- */
+    /**
+     * Simple module that just stores a value and outputs it
+     * when requested. No inputs.
+     */
     class Value : public Module
     {
     public:
@@ -29,8 +29,7 @@ namespace chip
          * Constructs a Value, default value is 0.
          * @param _value Initial value (optional)
          */
-        Value(double _value = 0) : Module(INPUTS_TOTAL), value(_value)
-        {}
+        Value(double _value = 0) : Module(INPUTS_TOTAL), value(_value) {}
 
         /**
          * Copy assignment operator
@@ -58,8 +57,7 @@ namespace chip
          * Output the stored value.
          * @return The stored value
          */
-        double output() override
-        { return value; }
+        double output() override { return value; }
 
     private:
         double value;
