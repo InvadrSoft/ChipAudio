@@ -12,7 +12,7 @@ namespace chip
         double frequency = (input(FREQUENCY) == nullptr) ? 0 : input(FREQUENCY)->output();
         double amplitude = (input(AMPLITUDE) == nullptr) ? 0 : input(AMPLITUDE)->output();
 
-        double sampleIncrement = (wave.size() / sampleRate) * frequency;
+        double sampleIncrement = (wave.size() / sampleRate() ) * frequency;
         phase += sampleIncrement;
         if(phase >= wave.size() )
         {

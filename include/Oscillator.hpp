@@ -38,7 +38,7 @@ namespace chip
          * @param _interpolation Type of interpolation to use (optional)
          */
         Oscillator(InterpolationType _interpolation = NONE)
-                : Module(INPUTS_TOTAL), interpolation(_interpolation), phase(0), sampleRate(44100) {}
+                : Module(INPUTS_TOTAL), interpolation(_interpolation), phase(0) {}
 
         /**
          * Contructs an Oscillator using a given WaveTable.
@@ -46,7 +46,7 @@ namespace chip
          * @param _interpolation Type of interpolation to use (optional)
          */
         Oscillator(WaveTable _wave, InterpolationType _interpolation = NONE)
-                : Module(INPUTS_TOTAL), wave(_wave), interpolation(_interpolation), phase(0), sampleRate(44100) {}
+                : Module(INPUTS_TOTAL), wave(_wave), interpolation(_interpolation), phase(0) {}
 
         /**
          * Generates and outputs the next sample.
@@ -57,7 +57,6 @@ namespace chip
     private:
         WaveTable wave;
         InterpolationType interpolation;
-        double sampleRate;
         double phase;
     };
 }

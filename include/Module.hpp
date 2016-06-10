@@ -34,9 +34,15 @@ namespace chip
          */
         Module*& input(unsigned int _input) { return inputs[_input]; }
 
+        /**
+         * @return Current sample rate
+         */
+        static double sampleRate() { return sampleRate_; }
+
         virtual ~Module() {}
 
     private:
+        static double sampleRate_;
         std::vector<Module*> inputs;
     };
 }
