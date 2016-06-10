@@ -39,6 +39,11 @@ namespace chip
          */
         static double sampleRate() { return sampleRate_; }
 
+        /**
+         * @param sampleRate New sample rate
+         */
+        static void sampleRate(double sampleRate) { sampleRate_ = sampleRate; }
+
         virtual ~Module() {}
 
     private:
