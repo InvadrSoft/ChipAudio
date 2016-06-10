@@ -10,6 +10,9 @@
 
 namespace chip
 {
+    /**
+     * Wavetable oscillator module.
+     */
     class Oscillator : public Module
     {
     public:

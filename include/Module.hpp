@@ -9,9 +9,9 @@
 
 namespace chip
 {
-/**
- * Abstract base class for modules.
- */
+    /**
+     * Abstract base class for modules.
+     */
     class Module
     {
     public:

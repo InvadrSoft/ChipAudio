@@ -10,6 +10,9 @@
 
 namespace chip
 {
+    /**
+     * Simple 1 Pole Low-pass filter module.
+     */
     class FilterLP1Pole : public Module
     {
     public:
