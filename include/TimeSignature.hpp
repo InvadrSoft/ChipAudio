@@ -16,12 +16,14 @@ namespace chip
          * Constructs a TimeSignature, 4/4 by default.
          * @param _beats The number of beats in each bar (optional)
          * @param _noteValue The value of one beat (optional)
+         * @param _division The number of divisions in a whole note (optional)
          */
-        TimeSignature(unsigned int _beats = 4, unsigned int _noteValue = 4)
-                : beats(_beats), noteValue(_noteValue) {}
+        TimeSignature(unsigned int _beats = 4, unsigned int _noteValue = 4, unsigned int _division = 16)
+                : beats(_beats), noteValue(_noteValue), division(_division) {}
 
         unsigned int beats;
         unsigned int noteValue;
+        unsigned int division;
     };
 }
 
