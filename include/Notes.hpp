@@ -27,10 +27,9 @@ namespace chip
         NOTES_TOTAL
     };
 
-    struct noteFrequencies
+    class noteFrequencies
     {
-        double data[NOTES_TOTAL] {};
-
+    public:
         constexpr noteFrequencies()
         {
             data[0] = TUNING;
@@ -46,7 +45,11 @@ namespace chip
         }
 
         double operator[](int n) const { return data[n]; }
+
+    private:
+        double data[NOTES_TOTAL] {};
     };
+
     /**
      * Table mapping note numbers to frequencies
      */
