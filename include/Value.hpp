@@ -27,9 +27,9 @@ namespace chip
 
         /**
          * Constructs a Value, default value is 0.
-         * @param _value Initial value (optional)
+         * @param value Initial value (optional)
          */
-        Value(double _value = 0) : Module(INPUTS_TOTAL), value(_value) {}
+        Value(double value = 0) : Module(INPUTS_TOTAL), value_(value) {}
 
         /**
          * Copy assignment operator
@@ -38,7 +38,7 @@ namespace chip
          */
         Value& operator=(Value &pattern)
         {
-            value = pattern.value;
+            value_ = pattern.value_;
             return *this;
         }
 
@@ -49,7 +49,7 @@ namespace chip
          */
         Value& operator=(double newValue)
         {
-            value = newValue;
+            value_ = newValue;
             return *this;
         }
 
@@ -57,10 +57,10 @@ namespace chip
          * Output the stored value.
          * @return The stored value
          */
-        double output() override { return value; }
+        double output() override { return value_; }
 
     private:
-        double value;
+        double value_;
     };
 }
 

@@ -11,31 +11,31 @@ namespace chip
         double gate = (input(GATE) == nullptr) ? 0 : input(GATE)->output();
         double sustain = (input(SUSTAIN) == nullptr) ? 0 : input(SUSTAIN)->output();
 
-        if(gate > 0 && lastGateValue == 0) //rising edge
+        if(gate > 0 && lastGateValue_ == 0) //rising edge
         {
             double attack = (input(ATTACK) == nullptr) ? 0 : input(ATTACK)->output() * sampleRate();
             if(attack < gate)
             {
                 attack = gate;
             }
-            currentPhase = Phase::ATTACK;
-            currentIncrement = gate / attack;
+            currentPhase_ = Phase::ATTACK;
+            currentIncrement_ = gate / attack;
         }
-        else if(gate == 0 && lastGateValue > 0) //falling edge
+        else if(gate == 0 && lastGateValue_ > 0) //falling edge
         {
             double release = (input(RELEASE) == nullptr) ? 0 : input(RELEASE)->output() * sampleRate();
             if(release < sustain)
             {
                 release = sustain;
             }
-            currentPhase = Phase::RELEASE;
-            currentIncrement = -(sustain / release);
+            currentPhase_ = Phase::RELEASE;
+            currentIncrement_ = -(sustain / release);
         }
-        lastGateValue = gate;
+        lastGateValue_ = gate;
 
-        double signal = lastSignalValue + currentIncrement;
+        double signal = lastSignalValue_ + currentIncrement_;
 
-        switch(currentPhase)
+        switch(currentPhase_)
         {
             case Phase::ATTACK:
             {
@@ -47,8 +47,8 @@ namespace chip
                     {
                         decay = difference;
                     }
-                    currentPhase = Phase::DECAY;
-                    currentIncrement = -(difference / decay);
+                    currentPhase_ = Phase::DECAY;
+                    currentIncrement_ = -(difference / decay);
                 }
                 break;
             }
@@ -56,8 +56,8 @@ namespace chip
             {
                 if(signal <= sustain)
                 {
-                    currentPhase = Phase::SUSTAIN;
-                    currentIncrement = 0.0;
+                    currentPhase_ = Phase::SUSTAIN;
+                    currentIncrement_ = 0.0;
                 }
                 break;
             }
@@ -71,12 +71,12 @@ namespace chip
                 if(signal <= 0)
                 {
                     signal = 0;
-                    currentPhase = Phase::IDLE;
-                    currentIncrement = 0.0;
+                    currentPhase_ = Phase::IDLE;
+                    currentIncrement_ = 0.0;
                 }
             }
         }
 
-        return lastSignalValue = signal;
+        return lastSignalValue_ = signal;
     }
 }

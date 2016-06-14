@@ -38,18 +38,18 @@ namespace chip
 
         /**
          * Default constructor.
-         * @param _interpolation Type of interpolation to use (optional)
+         * @param interpolation Type of interpolation to use (optional)
          */
-        Oscillator(InterpolationType _interpolation = NONE)
-                : Module(INPUTS_TOTAL), interpolation(_interpolation), phase(0) {}
+        Oscillator(InterpolationType interpolation = NONE)
+                : Module(INPUTS_TOTAL), interpolation_(interpolation), phase_(0) {}
 
         /**
          * Contructs an Oscillator using a given WaveTable.
-         * @param _wave WaveTable for Oscillator to use
-         * @param _interpolation Type of interpolation to use (optional)
+         * @param wave WaveTable for Oscillator to use
+         * @param interpolation Type of interpolation to use (optional)
          */
-        Oscillator(WaveTable _wave, InterpolationType _interpolation = NONE)
-                : Module(INPUTS_TOTAL), wave(_wave), interpolation(_interpolation), phase(0) {}
+        Oscillator(WaveTable wave, InterpolationType interpolation = NONE)
+                : Module(INPUTS_TOTAL), wave_(wave), interpolation_(interpolation), phase_(0) {}
 
         /**
          * Generates and outputs the next sample.
@@ -58,9 +58,9 @@ namespace chip
         double output() override;
 
     private:
-        WaveTable wave;
-        InterpolationType interpolation;
-        double phase;
+        WaveTable wave_;
+        InterpolationType interpolation_;
+        double phase_;
     };
 }
 

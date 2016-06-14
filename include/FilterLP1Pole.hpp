@@ -30,7 +30,7 @@ namespace chip
          * Default constructor.
          */
         FilterLP1Pole()
-                : Module(INPUTS_TOTAL), a0(1.0), b1(0.0), z1(0.0) {}
+                : Module(INPUTS_TOTAL), a0_(1.0), b1_(0.0), z1_(0.0) {}
 
         /**
          * Output the result of filtering the input value.
@@ -39,13 +39,13 @@ namespace chip
         {
             double cutoff = (input(CUTOFF) == nullptr) ? 0 : input(CUTOFF)->output() / sampleRate();
             double inValue = (input(IN) == nullptr) ? 0 : input(IN)->output();
-            b1 = exp(-2.0 * M_PI * cutoff);
-            a0 = 1.0 - b1;
-            return z1 += (inValue - z1) * a0;
+            b1_ = exp(-2.0 * M_PI * cutoff);
+            a0_ = 1.0 - b1_;
+            return z1_ += (inValue - z1_) * a0_;
         }
 
     private:
-        double a0, b1, z1;
+        double a0_, b1_, z1_;
     };
 }
 

@@ -44,8 +44,8 @@ namespace chip
          * Default constructor.
          */
         EnvelopeADSR()
-                : Module(INPUTS_TOTAL), lastGateValue(0.0), currentPhase(Phase::IDLE),
-                  currentIncrement(0.0), lastSignalValue(0.0) {}
+                : Module(INPUTS_TOTAL), lastGateValue_(0.0), currentPhase_(Phase::IDLE),
+                  currentIncrement_(0.0), lastSignalValue_(0.0) {}
 
         /**
          * Generates and outputs the next sample.
@@ -54,10 +54,10 @@ namespace chip
         double output() override;
 
     private:
-        double lastGateValue;
-        double lastSignalValue;
-        double currentIncrement;
-        Phase currentPhase;
+        double lastGateValue_;
+        double lastSignalValue_;
+        double currentIncrement_;
+        Phase currentPhase_;
 
     };
 }

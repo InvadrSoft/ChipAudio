@@ -12,31 +12,31 @@ namespace chip
         double frequency = (input(FREQUENCY) == nullptr) ? 0 : input(FREQUENCY)->output();
         double amplitude = (input(AMPLITUDE) == nullptr) ? 0 : input(AMPLITUDE)->output();
 
-        double sampleIncrement = (wave.size() / sampleRate() ) * frequency;
-        phase += sampleIncrement;
-        if(phase >= wave.size() )
+        double sampleIncrement = (wave_.size() / sampleRate() ) * frequency;
+        phase_ += sampleIncrement;
+        if(phase_ >= wave_.size() )
         {
-            phase -= wave.size();
+            phase_ -= wave_.size();
         }
-        int phaseTrunc = static_cast<int>(phase);
+        int phaseTrunc = static_cast<int>(phase_);
 
-        double nextValue = wave[(phaseTrunc + 1) & (wave.size() - 1)];
+        double nextValue = wave_[(phaseTrunc + 1) & (wave_.size() - 1)];
         double signal;
         double toNextStep;
 
-        switch(interpolation)
+        switch(interpolation_)
         {
             case NONE:
             default:
-                signal = wave[phaseTrunc];
+                signal = wave_[phaseTrunc];
                 break;
             case LINEAR:
-                toNextStep = phase - phaseTrunc;
-                signal = wave[phaseTrunc] + ( (nextValue - wave[phaseTrunc]) * toNextStep);
+                toNextStep = phase_ - phaseTrunc;
+                signal = wave_[phaseTrunc] + ( (nextValue - wave_[phaseTrunc]) * toNextStep);
                 break;
             case COSINE:
-                toNextStep = (1 - cos( (phase - phaseTrunc) * M_PI) ) / 2;
-                signal = wave[phaseTrunc] + ( (nextValue - wave[phaseTrunc]) * toNextStep);
+                toNextStep = (1 - cos( (phase_ - phaseTrunc) * M_PI) ) / 2;
+                signal = wave_[phaseTrunc] + ( (nextValue - wave_[phaseTrunc]) * toNextStep);
                 break;
         }
         return signal * amplitude;

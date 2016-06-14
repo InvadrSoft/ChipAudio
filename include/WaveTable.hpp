@@ -29,19 +29,19 @@ namespace chip
          * Constructs a WaveTable with given size. Default size is 32 steps.
          * @param size Number of steps in the WaveTable (optional)
          */
-        WaveTable(TableSize size = SIZE_32) : table(size) {}
+        WaveTable(TableSize size = SIZE_32) : table_(size) {}
 
         /**
          * @return The size of the WaveTable in steps
          */
-        std::size_t size() { return table.size(); }
+        std::size_t size() { return table_.size(); }
 
         /**
          * Access a step of the WaveTable by index.
          * @param n Index of step
          * @return Reference to the step
          */
-        double& operator[](std::size_t n) { return table[n]; }
+        double& operator[](std::size_t n) { return table_[n]; }
 
         /**
          * Assign values from initializer list to WaveTable.
@@ -51,16 +51,16 @@ namespace chip
          */
         WaveTable& operator=(std::initializer_list<double> initList)
         {
-            if(initList.size() != table.size() )
+            if(initList.size() != table_.size() )
             {
                 throw std::length_error("Size of initializer list doesn't match table size.");
             }
-            table = initList;
+            table_ = initList;
             return *this;
         }
 
     private:
-        std::vector<double> table;
+        std::vector<double> table_;
     };
 }
 
