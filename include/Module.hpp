@@ -19,7 +19,7 @@ namespace chip
          * Construct module with specified number of inputs.
          * @param _inputs No. of inputs
          */
-        Module(unsigned int _inputs) : inputs_(_inputs, nullptr) {}
+        Module(unsigned int inputs) : inputs_(inputs, nullptr) {}
 
         /**
          * Override this method to define the behaviour of the module.
@@ -32,7 +32,7 @@ namespace chip
          * @param _input Index of input
          * @return Pointer to module at given index
          */
-        Module*& input(unsigned int _input) { return inputs_[_input]; }
+        Module*& input(unsigned int input) { return inputs_[input]; }
 
         /**
          * @return Current sample rate
