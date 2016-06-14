@@ -8,19 +8,19 @@ namespace chip
 {
     TimeValue& TimeValue::operator++()
     {
-        tick++;
-        if(tick > (TICKS_PER_WHOLE_NOTE / timeSignature.division) )
+        tick_++;
+        if(tick_ > (TICKS_PER_WHOLE_NOTE / timeSignature_.division) )
         {
-            tick = 1;
-            division++;
-            if(division > (timeSignature.division / timeSignature.noteValue) )
+            tick_ = 1;
+            division_++;
+            if(division_ > (timeSignature_.division / timeSignature_.noteValue) )
             {
-                division = 1;
-                beat++;
-                if(beat > timeSignature.beats)
+                division_ = 1;
+                beat_++;
+                if(beat_ > timeSignature_.beats)
                 {
-                    beat = 1;
-                    bar++;
+                    beat_ = 1;
+                    bar_++;
                 }
             }
         }

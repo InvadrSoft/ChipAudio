@@ -12,13 +12,11 @@ namespace chip
     constexpr int TICKS_PER_WHOLE_NOTE = 3840;
 
     /**
-     * Struct representing a time value.
+     * Class representing a time value.
      */
-    struct TimeValue
+    class TimeValue
     {
-        unsigned int bar, beat, division, tick;
-        TimeSignature timeSignature;
-
+    public:
         /**
          * Constructs a time value.
          * @param _bar Bar number
@@ -26,8 +24,8 @@ namespace chip
          * @param _division Division number
          * @param _tick Tick number
          */
-        TimeValue(unsigned int _bar, unsigned int _beat, unsigned int _division, unsigned int _tick)
-                : bar(_bar), beat(_beat), division(_division), tick(_tick)
+        TimeValue(unsigned int bar, unsigned int beat, unsigned int division, unsigned int tick)
+                : bar_(bar), beat_(beat), division_(division), tick_(tick)
         {}
 
         /**
@@ -36,7 +34,8 @@ namespace chip
          */
         bool operator==(TimeValue rhs)
         {
-            return (bar == rhs.bar) && (beat == rhs.beat) && (division == rhs.division) && (tick == rhs.tick);
+            return (bar_ == rhs.bar_) && (beat_ == rhs.beat_)
+                   && (division_ == rhs.division_) && (tick_ == rhs.tick_);
         }
 
         /**
@@ -44,6 +43,18 @@ namespace chip
          * @return A reference to this TimeValue
          */
         TimeValue& operator++();
+
+        const unsigned int& bar() { return bar_; }
+        const unsigned int& beat() { return beat_; }
+        const unsigned int& division() { return division_; }
+        const unsigned int& tick() { return tick_; }
+
+        const TimeSignature timeSignature() { return timeSignature_; }
+        void timeSignature(TimeSignature newTimeSig) { timeSignature_ = newTimeSig; }
+
+    private:
+        unsigned int bar_, beat_, division_, tick_;
+        TimeSignature timeSignature_;
     };
 }
 #endif //CHIPAUDIO_TIMEVALUE_HPP
