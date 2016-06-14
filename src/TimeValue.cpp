@@ -26,4 +26,34 @@ namespace chip
         }
         return *this;
     }
+
+    bool TimeValue::operator<(const TimeValue& rhs) const
+    {
+        if(bar_ < rhs.bar_ )
+        {
+            return true;
+        }
+        if(bar_ == rhs.bar_ )
+        {
+            if(beat_ < rhs.beat_ )
+            {
+                return true;
+            }
+            if(beat_ == rhs.beat_ )
+            {
+                if(division_ < rhs.division_ )
+                {
+                    return true;
+                }
+                if(division_ == rhs.division_ )
+                {
+                    if(tick_ < rhs.tick_ )
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

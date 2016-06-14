@@ -31,12 +31,20 @@ namespace chip
         /**
          * Test if two TimeValues are equal.
          * @param rhs Right hand side of comparison
+         * @return True if equal, else false
          */
-        bool operator==(TimeValue rhs)
+        bool operator==(const TimeValue& rhs) const
         {
             return (bar_ == rhs.bar_) && (beat_ == rhs.beat_)
                    && (division_ == rhs.division_) && (tick_ == rhs.tick_);
         }
+
+        /**
+         * Test whether rhs is before this TimeValue.
+         * @param rhs Right hand side of comparison
+         * @return True if this TimeValue comes before rhs
+         */
+        bool operator<(const TimeValue& rhs) const;
 
         /**
          * Increment the time value by one tick.
@@ -44,10 +52,10 @@ namespace chip
          */
         TimeValue& operator++();
 
-        const unsigned int& bar() { return bar_; }
-        const unsigned int& beat() { return beat_; }
-        const unsigned int& division() { return division_; }
-        const unsigned int& tick() { return tick_; }
+        const unsigned int& bar() const { return bar_; }
+        const unsigned int& beat() const { return beat_; }
+        const unsigned int& division() const { return division_; }
+        const unsigned int& tick() const { return tick_; }
 
         const TimeSignature timeSignature() { return timeSignature_; }
         void timeSignature(TimeSignature newTimeSig) { timeSignature_ = newTimeSig; }
