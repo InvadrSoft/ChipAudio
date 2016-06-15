@@ -6,6 +6,19 @@
 
 namespace chip
 {
+    Sample Channel::generateNextSample()
+    {
+        double output = output_->output() * volume_;
+        if(pan_ <= 0)
+        {
+            return Sample(output * (pan_ + 1), output);
+        }
+        else
+        {
+            return Sample(output, output * (-pan_ + 1) );
+        }
+    }
+
     void Channel::processEvents()
     {
         if(currentPattern_ < patterns_.size() )

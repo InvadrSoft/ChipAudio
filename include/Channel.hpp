@@ -12,6 +12,7 @@
 #include "Oscillator.hpp"
 #include "Value.hpp"
 #include "Notes.hpp"
+#include "Sample.hpp"
 
 namespace chip
 {
@@ -52,7 +53,7 @@ namespace chip
          * Get the next sample from the output module.
          * @return The generated sample value
          */
-        double generateNextSample() { return output_->output(); }
+        Sample generateNextSample();
 
         /**
          * Add a pattern to the channel's pattern list.
@@ -133,7 +134,8 @@ namespace chip
         std::vector<Oscillator> oscillators_;
         Module* output_;
 
-        double volume_, pan_;
+        double volume_;
+        double pan_; //-1 for hard left, 1 for hard right, 0 center
         unsigned int currentPattern_;
         bool loop_;
     };
