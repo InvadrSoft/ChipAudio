@@ -36,7 +36,7 @@ namespace chip
         /**
          * Default constructor.
          */
-        Channel() : volume_(1), pan_(0), currentPattern_(0), loop_(0)
+        Channel() : volume_(1), pan_(0), currentPattern_(0), loop_(0), output_(nullptr)
         {
             for(int i = 0; i < INPUTS_TOTAL; i++)
             {

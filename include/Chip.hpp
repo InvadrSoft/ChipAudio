@@ -67,6 +67,13 @@ namespace chip
         }
 
         /**
+         * Access a channel by index.
+         * @param index Index of channel
+         * @return Reference to the indexed channel
+         */
+        Channel& channel(unsigned int index) { return channels_[index]; }
+
+        /**
          * Set a new tempo
          * @param tempo New tempo
          */
