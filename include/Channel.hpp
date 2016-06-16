@@ -113,6 +113,18 @@ namespace chip
          */
         void output(Module* module) { output_ = module; }
 
+        /**
+         * Reset playback to beginning of pattern list.
+         */
+        void restart()
+        {
+            currentPattern_ = 0;
+            for(Pattern& pattern : patterns_)
+            {
+                pattern.restart();
+            }
+        }
+
         const double& volume() const { return volume_; }
         void volume(double volume) { volume_ = volume; }
 

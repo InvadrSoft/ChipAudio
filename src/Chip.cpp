@@ -8,18 +8,21 @@ namespace chip
 {
     Sample Chip::generateNextSample()
     {
-        std::vector<std::future<Sample> > channelResults;
-
-        for(Channel& channel : channels_)
+        if(sampleCounter_ >= samplesPerTick_)
         {
-            channelResults.push_back(std::async(channel.generateNextSample() ) );
+            sampleCounter_ = 0;
+            for(Channel& channel : channels_)
+            {
+                channel.processEvents();
+            }
         }
+        sampleCounter_++;
 
         Sample output;
 
-        for(auto& result : channelResults)
+        for(Channel& channel : channels_)
         {
-            output += result.get();
+            output += channel.generateNextSample();
         }
 
         return output;
