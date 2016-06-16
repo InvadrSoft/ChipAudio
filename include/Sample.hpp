@@ -5,6 +5,9 @@
 #ifndef CHIPAUDIO_SAMPLE_HPP
 #define CHIPAUDIO_SAMPLE_HPP
 
+/**
+ * Struct containing stereo sample data.
+ */
 struct Sample
 {
     double left;

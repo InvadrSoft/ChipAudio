@@ -73,10 +73,25 @@ namespace chip
         void tempo(double tempo)
         {
             tempo_ = tempo;
-            samplesPerTick_ = Module::sampleRate() /  ( (tempo_ / 60) * (TICKS_PER_WHOLE_NOTE / 4.0) );
+            calculateSamplesPerTick();
+        }
+
+        /**
+         * Set a new sample rate.
+         * @param sampleRate New sample rate
+         */
+        void sampleRate(double sampleRate)
+        {
+            Module::sampleRate(sampleRate);
+            calculateSamplesPerTick();
         }
 
     private:
+        void calculateSamplesPerTick()
+        {
+            samplesPerTick_ = Module::sampleRate() /  ( (tempo_ / 60) * (TICKS_PER_WHOLE_NOTE / 4.0) );
+        }
+
         std::vector<Channel> channels_;
 
         double tempo_;

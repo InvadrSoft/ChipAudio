@@ -3,6 +3,7 @@
 //
 
 #include "PortAudioHandler.hpp"
+#include "Module.hpp"
 
 namespace chip
 {
@@ -29,7 +30,7 @@ namespace chip
                                             0,          /* no input channels */
                                             2,          /* stereo output */
                                             paFloat32,  /* 32 bit floating point output */
-                                            SAMPLE_RATE,
+                                            Module::sampleRate(),
                                             paFramesPerBufferUnspecified,        /* frames per buffer, i.e. the number
                                                            of sample frames that PortAudio will
                                                            request from the callback. Many apps

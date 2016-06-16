@@ -12,8 +12,6 @@
 
 namespace chip
 {
-    constexpr int SAMPLE_RATE = 44100;
-
     class PAException : public std::runtime_error
     {
     public:
@@ -23,7 +21,9 @@ namespace chip
 
     class PortAudioHandler
     {
-    public:
+        friend class Chip;
+
+    private:
         PortAudioHandler();
 
         ~PortAudioHandler();
@@ -32,7 +32,6 @@ namespace chip
 
         void stop();
 
-    private:
         static int paCallback(const void *inputBuffer, void *outputBuffer,
                               unsigned long framesPerBuffer,
                               const PaStreamCallbackTimeInfo *timeInfo,
