@@ -12,11 +12,15 @@ namespace chip
         double frequency = (input(FREQUENCY) == nullptr) ? 0 : input(FREQUENCY)->output();
         double amplitude = (input(AMPLITUDE) == nullptr) ? 0 : input(AMPLITUDE)->output();
 
-        double sampleIncrement = (wave_.size() / sampleRate() ) * fabs(frequency);
+        double sampleIncrement = (wave_.size() / sampleRate() ) * frequency;
         phase_ += sampleIncrement;
         if(phase_ >= wave_.size() )
         {
             phase_ -= wave_.size();
+        }
+        else if(phase_ < 0)
+        {
+            phase_ += wave_.size();
         }
         int phaseTrunc = static_cast<int>(phase_);
 
