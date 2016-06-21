@@ -36,7 +36,7 @@ int main()
         //inputs to filter
         chip::Value &cutoff = channel.addParameter(chip::Value(440), "cutoff");
         filter.input(chip::FilterLP1Pole::CUTOFF) = &cutoff;
-        chip::Oscillator &oscillator = channel.addOscillator(chip::Oscillator(waveTable, chip::Oscillator::COSINE));
+        chip::Oscillator &oscillator = channel.addOscillator(new chip::Oscillator(waveTable, chip::Oscillator::COSINE));
         filter.input(chip::FilterLP1Pole::IN) = &oscillator;
         //inputs to oscillator
         oscillator.input(chip::Oscillator::FREQUENCY) = &channel.input(chip::Channel::NOTE_FREQ);

@@ -94,10 +94,10 @@ namespace chip
          * @param oscillator Oscillator to add
          * @return A reference to the added oscillator
          */
-        Oscillator& addOscillator(Oscillator oscillator)
+        Oscillator& addOscillator(Oscillator* oscillator)
         {
-            oscillators_.push_back(std::move(oscillator) );
-            return oscillators_.back();
+            oscillators_.push_back(std::unique_ptr<Oscillator>(oscillator) );
+            return *oscillators_.back();
         }
 
         /**
@@ -143,7 +143,7 @@ namespace chip
         std::vector<std::unique_ptr<Module> > modules_;
         std::vector<Value> inputs_;
         std::map<std::string, Value> parameters_;
-        std::vector<Oscillator> oscillators_;
+        std::vector<std::unique_ptr<Oscillator> > oscillators_;
         Module* output_;
 
         double volume_;
