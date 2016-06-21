@@ -51,7 +51,7 @@ namespace chip
                 {
                     if(loop_)
                     {
-                        currentPattern_ = 0;
+                        currentPattern_ = loopStart_;
                     }
                 }
             }

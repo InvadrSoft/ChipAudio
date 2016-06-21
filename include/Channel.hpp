@@ -36,7 +36,7 @@ namespace chip
         /**
          * Default constructor.
          */
-        Channel() : volume_(1), pan_(0), currentPattern_(0), loop_(0), output_(nullptr)
+        Channel() : volume_(1), pan_(0), currentPattern_(0), loop_(0), loopStart_(0), output_(nullptr)
         {
             for(int i = 0; i < INPUTS_TOTAL; i++)
             {
@@ -137,6 +137,9 @@ namespace chip
         const bool& loop() const { return loop_; }
         void loop(bool loop) { loop_ = loop; }
 
+        const int& loopStart() const { return loopStart_; }
+        void loopStart(unsigned int index) { loopStart_ = index; }
+
     private:
         std::vector<Pattern> patterns_;
 
@@ -150,6 +153,7 @@ namespace chip
         double pan_; //-1 for hard left, 1 for hard right, 0 center
         unsigned int currentPattern_;
         bool loop_;
+        unsigned int loopStart_; //index of pattern
     };
 }
 
