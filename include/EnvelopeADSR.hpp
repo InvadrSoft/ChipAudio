@@ -25,6 +25,7 @@ namespace chip
             DECAY,
             SUSTAIN,
             RELEASE,
+            RESTART,
             INPUTS_TOTAL
         };
 

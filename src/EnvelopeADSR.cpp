@@ -11,7 +11,8 @@ namespace chip
         double gate = (input(GATE) == nullptr) ? 0 : input(GATE)->output();
         double sustain = (input(SUSTAIN) == nullptr) ? 0 : input(SUSTAIN)->output();
 
-        if(gate > 0 && lastGateValue_ == 0) //rising edge
+        if( (gate > 0 && lastGateValue_ == 0 ) ||
+            (input(RESTART) != nullptr && input(RESTART)->output() > 0) ) //rising edge
         {
             double attack = (input(ATTACK) == nullptr) ? 0 : input(ATTACK)->output() * sampleRate();
             if(attack < gate)

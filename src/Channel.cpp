@@ -9,6 +9,7 @@ namespace chip
     Sample Channel::generateNextSample()
     {
         double output = output_->output() * volume_;
+        inputs_[NEW_NOTE] = 0;
         if(pan_ <= 0)
         {
             return Sample(output * (pan_ + 1), output);
@@ -33,6 +34,7 @@ namespace chip
                         inputs_[NOTE_NUMBER] = event.note;
                         inputs_[NOTE_FREQ] = FREQ_TABLE[event.note];
                         inputs_[GATE_IN] = event.value;
+                        inputs_[NEW_NOTE] = 1;
                         break;
                     case NOTE_OFF:
                         inputs_[GATE_IN] = 0;

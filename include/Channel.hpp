@@ -31,6 +31,7 @@ namespace chip
             NOTE_FREQ,
             NOTE_NUMBER,
             GATE_IN,
+            NEW_NOTE,
             INPUTS_TOTAL
         };
 
@@ -180,6 +181,8 @@ namespace chip
 
         const unsigned int& loopStart() const { return loopStart_; }
         void loopStart(unsigned int index) { loopStart_ = index; }
+
+        bool noPatterns() { return patterns_.empty(); }
 
     private:
         std::deque<Pattern> patterns_;
