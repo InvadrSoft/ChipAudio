@@ -5,6 +5,7 @@
 #ifndef CHIPAUDIO_CHANNEL_HPP
 #define CHIPAUDIO_CHANNEL_HPP
 
+#include <deque>
 #include <vector>
 #include <map>
 #include "Pattern.hpp"
@@ -64,6 +65,47 @@ namespace chip
         {
             patterns_.push_back(std::move(pattern) );
             return patterns_.back();
+        }
+
+        /**
+         * Add a pattern to the pattern list at a given index.
+         * @param pattern Pattern to add
+         * @param index Index to put pattern
+         * @return A reference to the added pattern
+         */
+        Pattern& addPattern(Pattern pattern, int index)
+        {
+            patterns_.insert(patterns_.begin() + index, std::move(pattern) );
+            if(currentPattern_ > index)
+            {
+                currentPattern_++;
+            }
+            return *(patterns_.begin() + index);
+        }
+
+        /**
+         * Remove the first pattern in channel's pattern list.
+         */
+        void removeFirstPattern()
+        {
+            patterns_.pop_front();
+            if(currentPattern_ > 0)
+            {
+                currentPattern_--;
+            }
+        }
+
+        /**
+         * Remove the pattern at the given index in the pattern list.
+         * @param index Index of pattern
+         */
+        void removePattern(int index)
+        {
+            patterns_.erase(patterns_.begin() + index);
+            if(currentPattern_ > index)
+            {
+                currentPattern_--;
+            }
         }
 
         /**
@@ -141,7 +183,7 @@ namespace chip
         void loopStart(unsigned int index) { loopStart_ = index; }
 
     private:
-        std::vector<Pattern> patterns_;
+        std::deque<Pattern> patterns_;
 
         std::vector<std::unique_ptr<Module> > modules_;
         std::vector<Value> inputs_;
