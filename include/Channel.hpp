@@ -75,12 +75,11 @@ namespace chip
          */
         Pattern& addPattern(Pattern pattern, int index)
         {
-            patterns_.insert(patterns_.begin() + index, std::move(pattern) );
             if(currentPattern_ > index)
             {
                 currentPattern_++;
             }
-            return *(patterns_.begin() + index);
+            return *(patterns_.insert(patterns_.begin() + index, std::move(pattern) ) );
         }
 
         /**
