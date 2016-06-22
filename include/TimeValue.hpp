@@ -52,6 +52,8 @@ namespace chip
          */
         TimeValue& operator++();
 
+        TimeValue& operator+=(const TimeValue& rhs);
+
         const unsigned int& bar() const { return bar_; }
         const unsigned int& beat() const { return beat_; }
         const unsigned int& division() const { return division_; }

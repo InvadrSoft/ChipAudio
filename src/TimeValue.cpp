@@ -8,22 +8,38 @@ namespace chip
 {
     TimeValue& TimeValue::operator++()
     {
-        tick_++;
+        return operator+=(TimeValue(0, 0, 0, 1) );
+    }
+
+    TimeValue& TimeValue::operator+=(const TimeValue& rhs)
+    {
+        int carry = 0;
+
+        tick_ += rhs.tick_;
         if(tick_ > (TICKS_PER_WHOLE_NOTE / timeSignature_.division) )
         {
             tick_ = 1;
-            division_++;
-            if(division_ > (timeSignature_.division / timeSignature_.noteValue) )
-            {
-                division_ = 1;
-                beat_++;
-                if(beat_ > timeSignature_.beats)
-                {
-                    beat_ = 1;
-                    bar_++;
-                }
-            }
+            carry = 1;
         }
+
+        division_ += rhs.division_ + carry;
+        carry = 0;
+        if(division_ > (timeSignature_.division / timeSignature_.noteValue) )
+        {
+            division_ = 1;
+            carry = 1;
+        }
+
+        beat_ += rhs.beat_ + carry;
+        carry = 0;
+        if(beat_ > timeSignature_.beats)
+        {
+            beat_ = 1;
+            carry = 1;
+        }
+
+        bar_ += rhs.bar_ + carry;
+
         return *this;
     }
 
