@@ -52,6 +52,11 @@ namespace chip
          */
         TimeValue& operator++();
 
+        /**
+         * Add the time value on the rhs to this TimeValue.
+         * @param rhs Right hand side of addition
+         * @return A reference to this TimeValue
+         */
         TimeValue& operator+=(const TimeValue& rhs);
 
         const unsigned int& bar() const { return bar_; }
