@@ -178,7 +178,7 @@ namespace chip
         const bool& loop() const { return loop_; }
         void loop(bool loop) { loop_ = loop; }
 
-        const int& loopStart() const { return loopStart_; }
+        const unsigned int& loopStart() const { return loopStart_; }
         void loopStart(unsigned int index) { loopStart_ = index; }
 
     private:
