@@ -1,3 +1,11 @@
+/*! \file
+ *  \brief Generative example
+ *
+ *  Simple generative music example, any input causes program to exit.
+ *
+ *  \include generative.cpp
+ */
+
 #include <array>
 #include <cstdlib>
 #include <ctime>

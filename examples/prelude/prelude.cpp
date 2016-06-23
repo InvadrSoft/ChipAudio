@@ -1,3 +1,9 @@
+/*! \file
+ *  \brief Prelude example
+ *
+ *  \include prelude.cpp
+ */
+
 #include <array>
 #include <iostream>
 #include "chipaudio.hpp"

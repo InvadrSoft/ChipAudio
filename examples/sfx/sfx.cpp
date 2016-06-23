@@ -1,3 +1,12 @@
+/*! \file
+ *  \brief SFX example
+ *
+ *  Sound effect example, inputting 'q' causes program to exit, any other
+ *  input causes sound effect to play.
+ *
+ *  \include sfx.cpp
+ */
+
 #include <iostream>
 #include "chipaudio.hpp"
 #include "chipmodules.hpp"
