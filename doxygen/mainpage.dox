@@ -1,0 +1,22 @@
+/*! \mainpage ChipAudio Documentation
+ *
+ * \section intro_sec Introduction
+ *
+ * Introduction to ChipAudio.
+ *
+ * \section keyclass_sec Important Classes
+ *
+ * - \link Chip \endlink
+ *
+ * - \link Channel \endlink
+ *
+ * - \link Module \endlink
+ *
+ * \section example_sec Example Programs
+ *
+ * - \link generative.cpp \endlink
+ *
+ * - \link prelude.cpp \endlink
+ *
+ * - \link sfx.cpp \endlink
+ */
