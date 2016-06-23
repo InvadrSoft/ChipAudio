@@ -6,11 +6,11 @@
  *
  * \section keyclass_sec Important Classes
  *
- * - \link Chip \endlink
+ * - chip::Chip
  *
- * - \link Channel \endlink
+ * - chip::Channel
  *
- * - \link Module \endlink
+ * - chip::Module
  *
  * \section example_sec Example Programs
  *
