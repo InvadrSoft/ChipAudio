@@ -59,7 +59,7 @@ namespace chip
          */
         TimeValue& operator+=(const TimeValue& rhs);
 
-        const TimeValue operator+(const TimeValue& rhs)
+        const TimeValue operator+(const TimeValue& rhs) const
         {
             auto result = *this;
             result += rhs;
