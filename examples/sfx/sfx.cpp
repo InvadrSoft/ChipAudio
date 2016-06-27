@@ -15,7 +15,7 @@ int main()
 {
     chip::Chip chip;
 
-    chip::Channel& channel = chip.addChannel(chip::Channel() );
+    chip::Channel& channel = chip.addChannel();
     channel.volume(0.6);
 
     chip::WaveTable waveTable(chip::WaveTable::SIZE_8);

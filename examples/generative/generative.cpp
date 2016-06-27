@@ -27,7 +27,7 @@ int main()
 
     for(int i = 0; i < CHANNELS; i++)
     {
-        chip::Channel& channel = chip.addChannel(chip::Channel() );
+        chip::Channel& channel = chip.addChannel();
         channel.volume(1.0 / CHANNELS + 0.3);
         channel.pan( (rand() % 20 + -10) / 10.0);
         channel.loop(true);

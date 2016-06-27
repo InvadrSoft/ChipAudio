@@ -35,7 +35,7 @@ int main()
 
     for(int channelNum = 0; channelNum < 2; channelNum++)
     {
-        chip::Channel& channel = chip.addChannel(chip::Channel() );
+        chip::Channel& channel = chip.addChannel();
         channel.volume(0.5);
         channel.pan(-0.1);
 

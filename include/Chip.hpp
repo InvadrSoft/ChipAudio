@@ -57,12 +57,11 @@ namespace chip
 
         /**
          * Add a channel to the chip.
-         * @param channel Channel to add
          * @return A reference to the added channel
          */
-        Channel& addChannel(Channel channel)
+        Channel& addChannel()
         {
-            channels_.push_back(std::move(channel) );
+            channels_.push_back(Channel() );
             return channels_.back();
         }
 
