@@ -28,12 +28,6 @@ namespace chip
         }
 
         /**
-         * Generate the next sample by summing the output of all channels.
-         * @return The generated sample
-         */
-        Sample generateNextSample();
-
-        /**
          * Start/resume playback.
          */
         void start() { portAudioHandler_.start(std::bind(&Chip::generateNextSample, this) ); }
@@ -93,6 +87,8 @@ namespace chip
         }
 
     private:
+        Sample generateNextSample();
+
         void calculateSamplesPerTick()
         {
             samplesPerTick_ = Module::sampleRate() /  ( (tempo_ / 60) * (TICKS_PER_WHOLE_NOTE / 4.0) );

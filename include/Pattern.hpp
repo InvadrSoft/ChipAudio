@@ -17,6 +17,8 @@ namespace chip
      */
     class Pattern
     {
+        friend class Channel;
+
     public:
         /**
          * Default constructor.
@@ -49,11 +51,6 @@ namespace chip
         void addEvent(Event event, TimeValue timeValue);
 
         /**
-         * Advance the pattern to the next tick.
-         */
-        void nextTick() { ++currentPosition_; }
-
-        /**
          * Set current position back to beginning of pattern.
          */
         void restart() { currentPosition_ = TimeValue(1,1,1,1); }
@@ -65,6 +62,8 @@ namespace chip
         void endPosition(TimeValue time) { endPosition_ = time; }
 
     private:
+        void nextTick() { ++currentPosition_; }
+
         TimeValue currentPosition_;
         TimeValue endPosition_;
         TimeSignature timeSignature_;

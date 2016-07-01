@@ -22,6 +22,8 @@ namespace chip
      */
     class Channel
     {
+        friend class Chip;
+
     public:
         /**
          * Enumeration of all available input modules on this channel.
@@ -45,17 +47,6 @@ namespace chip
                 inputs_.push_back(Value() );
             }
         }
-
-        /**
-         * Process events and advance to the next tick in the current pattern.
-         */
-        void processEvents();
-
-        /**
-         * Get the next sample from the output module.
-         * @return The generated sample value
-         */
-        Sample generateNextSample();
 
         /**
          * Add a pattern to the channel's pattern list.
@@ -185,6 +176,9 @@ namespace chip
         bool noPatterns() { return patterns_.empty(); }
 
     private:
+        void processEvents();
+        Sample generateNextSample();
+
         std::deque<Pattern> patterns_;
 
         std::vector<std::unique_ptr<Module> > modules_;
