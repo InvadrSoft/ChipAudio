@@ -1,4 +1,4 @@
-/*! \mainpage ChipAudio Documentation
+/*! \mainpage Main Page
  *
  * \section intro_sec Introduction
  *
@@ -6,6 +6,17 @@
  * real-time, interactive applications.
  *
  * See the example programs below to get an idea of how the library works.
+ *
+ * \section header_sec Headers
+ *
+ * The \link chipaudio.hpp \endlink header includes all the essential components of the library, and the \link chipmodules.hpp \endlink header
+ * includes all the standard Modules. Most projects using the library should include both of these headers. Projects
+ * requiring the Lua script support should also include \link chipscript.hpp \endlink.
+ *
+ * \section depend_sec Dependencies
+ *
+ * ChipAudio requires the PortAudio library in order to build. In order to use the Lua script functionality, OOLua is
+ * also required as well as a suitable version of Lua (Lua, LuaJIT etc.)
  *
  * \section keyclass_sec Important Classes
  *
