@@ -1,3 +1,11 @@
+/*! \file
+ *  \brief Script example
+ *
+ *  Example program that runs a lua script (specified by command-line argument).
+ *
+ *  \include script.cpp
+ */
+
 #include <iostream>
 #include "chipaudio.hpp"
 #include "chipmodules.hpp"

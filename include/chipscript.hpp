@@ -11,10 +11,20 @@
 
 namespace chip
 {
+    /**
+     * Lua script handler.
+     */
     struct Script
     {
         Script();
+
+        /**
+         * Loads a lua script file.
+         * @param filename Name of Lua script file
+         * @return Error details if an error occurred
+         */
         std::string operator()(std::string filename);
+
         OOLUA::Script lua;
     };
 }
