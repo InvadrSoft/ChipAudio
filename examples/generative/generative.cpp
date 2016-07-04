@@ -41,23 +41,32 @@ int main()
         //first module in chain
         chip::Module &filter = channel.addModule(new chip::FilterLP1Pole());
         channel.output(&filter);
+
         //inputs to filter
         chip::Value &cutoff = channel.addParameter(chip::Value(440), "cutoff");
         filter.input(chip::FilterLP1Pole::CUTOFF) = &cutoff;
+
         chip::Oscillator &oscillator = channel.addOscillator(new chip::Oscillator(waveTable, chip::Oscillator::COSINE));
         filter.input(chip::FilterLP1Pole::IN) = &oscillator;
+
         //inputs to oscillator
         oscillator.input(chip::Oscillator::FREQUENCY) = &channel.input(chip::Channel::NOTE_FREQ);
+
         chip::Module &envelope = channel.addModule(new chip::EnvelopeADSR());
         oscillator.input(chip::Oscillator::AMPLITUDE) = &envelope;
+
         //inputs to envelope
         envelope.input(chip::EnvelopeADSR::GATE) = &channel.input(chip::Channel::GATE_IN);
+
         chip::Module &attack = channel.addParameter(chip::Value(0.11), "attack");
         envelope.input(chip::EnvelopeADSR::ATTACK) = &attack;
+
         chip::Module &decay = channel.addParameter(chip::Value(0.38), "decay");
         envelope.input(chip::EnvelopeADSR::DECAY) = &decay;
+
         chip::Module &sustain = channel.addParameter(chip::Value(0.1), "sustain");
         envelope.input(chip::EnvelopeADSR::SUSTAIN) = &sustain;
+
         chip::Module &release = channel.addParameter(chip::Value(0.01), "release");
         envelope.input(chip::EnvelopeADSR::RELEASE) = &release;
 
