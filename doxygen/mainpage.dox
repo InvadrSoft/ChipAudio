@@ -2,7 +2,10 @@
  *
  * \section intro_sec Introduction
  *
- * Introduction to ChipAudio.
+ * The ChipAudio library provides a means for implementing synthesised music and sound in
+ * real-time, interactive applications.
+ *
+ * See the example programs below to get an idea of how the library works.
  *
  * \section keyclass_sec Important Classes
  *
@@ -19,4 +22,6 @@
  * - \link prelude.cpp \endlink
  *
  * - \link sfx.cpp \endlink
+ *
+ * - \link script.cpp \endlink
  */
