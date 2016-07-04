@@ -43,6 +43,8 @@ namespace chip
          */
         double& operator[](std::size_t n) { return table_[n]; }
 
+        void set(unsigned int n, double value) { operator[](n) = value; }
+
         /**
          * Assign values from initializer list to WaveTable.
          * Throws a length_error if size of initializer list doesn't match size of the WaveTable.
