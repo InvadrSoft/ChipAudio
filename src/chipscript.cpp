@@ -131,6 +131,64 @@ OOLUA_PROXY_END
 OOLUA_EXPORT_FUNCTIONS(EnvelopeADSR)
 OOLUA_EXPORT_FUNCTIONS_CONST(EnvelopeADSR)
 
+OOLUA_PROXY(FilterLP1Pole, Module)
+    OOLUA_TAGS(Register_class_enums)
+    OOLUA_ENUMS(
+        OOLUA_ENUM(CUTOFF)
+        OOLUA_ENUM(IN)
+    )
+OOLUA_PROXY_END
+OOLUA_EXPORT_FUNCTIONS(FilterLP1Pole)
+OOLUA_EXPORT_FUNCTIONS_CONST(FilterLP1Pole)
+
+OOLUA_PROXY(Add, Module)
+    OOLUA_TAGS(Register_class_enums)
+    OOLUA_ENUMS(
+        OOLUA_ENUM(IN1)
+        OOLUA_ENUM(IN2)
+    )
+OOLUA_PROXY_END
+OOLUA_EXPORT_FUNCTIONS(Add)
+OOLUA_EXPORT_FUNCTIONS_CONST(Add)
+
+OOLUA_PROXY(Multiply, Module)
+    OOLUA_TAGS(Register_class_enums)
+    OOLUA_ENUMS(
+        OOLUA_ENUM(IN1)
+        OOLUA_ENUM(IN2)
+    )
+OOLUA_PROXY_END
+OOLUA_EXPORT_FUNCTIONS(Multiply)
+OOLUA_EXPORT_FUNCTIONS_CONST(Multiply)
+
+OOLUA_PROXY(Subtract, Module)
+    OOLUA_TAGS(Register_class_enums)
+    OOLUA_ENUMS(
+        OOLUA_ENUM(IN1)
+        OOLUA_ENUM(IN2)
+    )
+OOLUA_PROXY_END
+OOLUA_EXPORT_FUNCTIONS(Subtract)
+OOLUA_EXPORT_FUNCTIONS_CONST(Subtract)
+
+OOLUA_PROXY(Invert, Module)
+    OOLUA_TAGS(Register_class_enums)
+    OOLUA_ENUMS(
+        OOLUA_ENUM(IN)
+    )
+OOLUA_PROXY_END
+OOLUA_EXPORT_FUNCTIONS(Invert)
+OOLUA_EXPORT_FUNCTIONS_CONST(Invert)
+
+OOLUA_PROXY(NoteToFrequency, Module)
+    OOLUA_TAGS(Register_class_enums)
+    OOLUA_ENUMS(
+        OOLUA_ENUM(IN)
+    )
+OOLUA_PROXY_END
+OOLUA_EXPORT_FUNCTIONS(NoteToFrequency)
+OOLUA_EXPORT_FUNCTIONS_CONST(NoteToFrequency)
+
 OOLUA_PROXY(Channel)
     OOLUA_TAGS(Register_class_enums)
     OOLUA_ENUMS(
@@ -195,6 +253,36 @@ namespace chip
         return new EnvelopeADSR();
     }
 
+    FilterLP1Pole* newFilter()
+    {
+        return new FilterLP1Pole();
+    }
+
+    Add* newAdd()
+    {
+        return new Add();
+    }
+
+    Multiply* newMultiply()
+    {
+        return new Multiply();
+    }
+
+    Subtract* newSubtract()
+    {
+        return new Subtract();
+    }
+
+    Invert* newInvert()
+    {
+        return new Invert();
+    }
+
+    NoteToFrequency* newNoteToFrequency()
+    {
+        return new NoteToFrequency();
+    }
+
     void moduleInput(Module& module, unsigned int input, Module& inputModule)
     {
         module.input(input) = &inputModule;
@@ -203,6 +291,12 @@ namespace chip
     OOLUA_CFUNC(newOscillator, l_newOscillator)
     OOLUA_CFUNC(newValue, l_newValue)
     OOLUA_CFUNC(newEnvelope, l_newEnvelope)
+    OOLUA_CFUNC(newFilter, l_newFilter)
+    OOLUA_CFUNC(newAdd, l_newAdd)
+    OOLUA_CFUNC(newMultiply, l_newMultiply)
+    OOLUA_CFUNC(newSubtract, l_newSubtract)
+    OOLUA_CFUNC(newInvert, l_newInvert)
+    OOLUA_CFUNC(newNoteToFrequency, l_newNoteToFrequency)
 
     OOLUA_CFUNC(moduleInput, l_moduleInput)
     
@@ -213,11 +307,19 @@ namespace chip
         lua.register_class<Event>();
         lua.register_class<TimeValue>();
         lua.register_class<Pattern>();
+        lua.register_class<WaveTable>();
+
         lua.register_class<Module>();
         lua.register_class<Value>();
-        lua.register_class<WaveTable>();
         lua.register_class<Oscillator>();
         lua.register_class<EnvelopeADSR>();
+        lua.register_class<FilterLP1Pole>();
+        lua.register_class<Add>();
+        lua.register_class<Multiply>();
+        lua.register_class<Subtract>();
+        lua.register_class<Invert>();
+        lua.register_class<NoteToFrequency>();
+
         lua.register_class<Channel>();
         lua.register_class<Chip>();
 
@@ -226,6 +328,12 @@ namespace chip
         set_global(lua, "newValue", l_newValue);
         set_global(lua, "newEnvelope", l_newEnvelope);
         set_global(lua, "newOscillator", l_newOscillator);
+        set_global(lua, "newFilter", l_newFilter);
+        set_global(lua, "newAdd", l_newAdd);
+        set_global(lua, "newMultiply", l_newMultiply);
+        set_global(lua, "newSubtract", l_newSubtract);
+        set_global(lua, "newInvert", l_newInvert);
+        set_global(lua, "newNoteToFrequency", l_newNoteToFrequency);
     }
 
     std::string Script::operator()(std::string filename)
