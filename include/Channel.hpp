@@ -8,6 +8,7 @@
 #include <deque>
 #include <vector>
 #include <map>
+#include <memory>
 #include "Pattern.hpp"
 #include "Module.hpp"
 #include "Oscillator.hpp"
@@ -47,6 +48,8 @@ namespace chip
                 inputs_.push_back(Value() );
             }
         }
+
+        Channel(Channel&&) = default;
 
         /**
          * Add a pattern to the channel's pattern list.

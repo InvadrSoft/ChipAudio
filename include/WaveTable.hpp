@@ -5,6 +5,7 @@
 #ifndef CHIPAUDIO_WAVETABLE_HPP
 #define CHIPAUDIO_WAVETABLE_HPP
 
+#include <stdexcept>
 #include <vector>
 
 namespace chip

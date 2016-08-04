@@ -7,7 +7,7 @@
  */
 
 #include <array>
-#include <cstdlib>
+#include <stdlib.h>
 #include <ctime>
 #include <iostream>
 #include "chipaudio.hpp"

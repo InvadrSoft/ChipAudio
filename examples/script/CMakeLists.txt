@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(script)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -pagezero_size 10000 -image_base 100000000")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 
@@ -10,13 +10,60 @@ add_executable(script ${SOURCE_FILES})
 
 include_directories(${PROJECT_SOURCE_DIR}/../../include)
 
-find_library(audioToolbox AudioToolbox)
-find_library(audioUnit AudioUnit)
-find_library(coreAudio CoreAudio)
-find_library(coreServices CoreServices)
-find_library(ooLua OOLua)
-find_library(luaJit LuaJIT)
+find_library(PORTAUDIO_LIBRARY
+        NAMES
+        portaudio
+        PATHS
+        /portaudio/bin
+        /usr/lib
+        /usr/local/lib
+        /opt/local/lib
+        /sw/lib)
+target_link_libraries(script ${PORTAUDIO_LIBRARY})
+
+if(APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pagezero_size 10000 -image_base 100000000")
+    find_library(audioToolbox AudioToolbox)
+    find_library(audioUnit AudioUnit)
+    find_library(coreAudio CoreAudio)
+    find_library(coreServices CoreServices)
+    target_link_libraries(script ${audioUnit} ${audioToolbox} ${coreAudio} ${coreServices})
+endif(APPLE)
 
 target_link_libraries(script ${PROJECT_SOURCE_DIR}/../../bin/libchipaudio.a)
-target_link_libraries(script ${audioUnit} ${audioToolbox} ${coreAudio} ${coreServices} ${ooLua} ${luaJit})
-target_link_libraries(script -lportaudio)
+
+find_library(OOLUA_LIBRARY
+             NAMES
+             oolua
+             OOLua
+             PATHS
+             /oolua/bin
+             /usr/lib
+             /usr/local/lib
+             /opt/local/lib
+             /sw/lib)
+target_link_libraries(script ${OOLUA_LIBRARY})
+
+find_path(OOLUA_INCLUDE_DIR
+        NAMES
+        oolua/oolua.h
+        PATHS
+        /include
+        /usr/include
+        /usr/local/include
+        /opt/local/include
+        /sw/include)
+include_directories(${OOLUA_INCLUDE_DIR})
+
+find_library(LUAJIT_LIBRARY
+             NAMES
+             lua51
+             luajit
+             LuaJIT
+             PATHS
+             /LuaJIT/bin
+             /usr/lib
+             /usr/local/lib
+             /opt/local/lib
+             /sw/lib)
+target_link_libraries(script ${LUAJIT_LIBRARY})
