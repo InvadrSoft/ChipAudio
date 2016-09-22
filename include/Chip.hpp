@@ -5,8 +5,6 @@
 #ifndef CHIPAUDIO_CHIP_HPP
 #define CHIPAUDIO_CHIP_HPP
 
-#include <atomic>
-#include <thread>
 #include "Channel.hpp"
 #include "PortAudioHandler.hpp"
 
