@@ -15,6 +15,7 @@
 #include "Value.hpp"
 #include "Notes.hpp"
 #include "Sample.hpp"
+#include "SPSCRingBuffer.hpp"
 
 namespace chip
 {
@@ -41,7 +42,8 @@ namespace chip
         /**
          * Default constructor.
          */
-        Channel() : volume_(1), pan_(0), currentPattern_(0), loop_(0), loopStart_(0), output_(nullptr)
+        Channel()
+            : volume_(1), pan_(0), currentPattern_(0), loop_(0), loopStart_(0), consumePatterns_(0), output_(nullptr)
         {
             for(int i = 0; i < INPUTS_TOTAL; i++)
             {
@@ -100,6 +102,18 @@ namespace chip
             {
                 currentPattern_--;
             }
+        }
+
+        /**
+         * Add pattern to queue, which will subsequently be added to the channel's
+         * pattern list in a thread-safe manner. Not thread-safe if this method is
+         * called from more than one thread.
+         * @param pattern Pattern to add
+         * @return True if successful, false if queue was full
+         */
+        bool enqueuePattern(Pattern pattern)
+        {
+            return patternQueue_.push_back(pattern);
         }
 
         /**
@@ -176,6 +190,14 @@ namespace chip
         const unsigned int& loopStart() const { return loopStart_; }
         void loopStart(unsigned int index) { loopStart_ = index; }
 
+        const bool& consumePatterns() const { return consumePatterns_; }
+
+        /**
+         * Sets whether patterns are removed from the list after they finish.
+         * @param consume True to remove patterns after they finish, false to leave them
+         */
+        void consumePatterns(bool consume) { consumePatterns_ = consume; }
+
         bool noPatterns() { return patterns_.empty(); }
 
     private:
@@ -190,11 +212,14 @@ namespace chip
         std::vector<std::unique_ptr<Oscillator> > oscillators_;
         Module* output_;
 
+        SPSCRingBuffer<Pattern, 8> patternQueue_;
+
         double volume_;
         double pan_; //-1 for hard left, 1 for hard right, 0 center
         unsigned int currentPattern_;
         bool loop_;
         unsigned int loopStart_; //index of pattern
+        bool consumePatterns_;
     };
 }
 

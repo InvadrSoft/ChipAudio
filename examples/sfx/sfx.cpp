@@ -22,6 +22,9 @@ int main()
     //set the channel's volume
     channel.volume(0.6);
 
+    //set the channel to remove patterns after they finish
+    channel.consumePatterns(true);
+
     //create a wavetable with an asymmetrical shape
     chip::WaveTable waveTable(chip::WaveTable::SIZE_8);
     waveTable = { 0.0, 1.0, 0.0, -1.0, 0.0, 1.0, -1.0, 1.0 };
@@ -124,24 +127,17 @@ int main()
     //while there is an input and it is not 'q'
     while(std::cin.get() != 'q')
     {
-        //if the channel has a pattern
-        if(!channel.noPatterns() )
-        {
-            //remove it
-            channel.removeFirstPattern();
-        }
-
-        //add a new pattern to the channel
-        chip::Pattern& pattern = channel.addPattern(chip::Pattern() );
+        //create a new pattern
+        chip::Pattern pattern;
 
         //add a note on representing the start of the sound effect
         pattern.addEvent(chip::Event(chip::NOTE_ON, chip::C1, 1), chip::TimeValue(1, 1, 1, 1) );
 
         //set the end of the pattern
-        pattern.endPosition(chip::TimeValue(2, 1, 1, 1) );
+        pattern.endPosition(chip::TimeValue(1, 1, 1, 2) );
 
-        //restart the channel's playback so the sound effect plays immediately
-        channel.restart();
+        //add the pattern to the channel in a thread-safe manner
+        channel.enqueuePattern(pattern);
     }
 
     //stop playback

@@ -22,6 +22,12 @@ namespace chip
 
     void Channel::processEvents()
     {
+        Pattern newPattern;
+        while(patternQueue_.pop_front(newPattern) )
+        {
+            addPattern(newPattern);
+        }
+
         if(currentPattern_ < patterns_.size() )
         {
             Pattern &currentPattern = patterns_[currentPattern_];
@@ -47,8 +53,15 @@ namespace chip
             currentPattern.nextTick();
             if(currentPattern.finished() )
             {
-                currentPattern.restart();
-                currentPattern_++;
+                if(consumePatterns_)
+                {
+                    removePattern(currentPattern_);
+                }
+                else
+                {
+                    currentPattern.restart();
+                    currentPattern_++;
+                }
                 if(currentPattern_ >= patterns_.size())
                 {
                     if(loop_)
