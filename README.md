@@ -8,7 +8,7 @@ The ChipAudio library provides a means for implementing synthesised music and so
 
 See the example programs to get an idea of how the library works.
 
-Currently tested and working on Mac OS X.
+Currently tested and working on Mac OS X and Windows.
 
 # Headers
 
