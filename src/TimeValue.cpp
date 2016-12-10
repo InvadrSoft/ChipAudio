@@ -16,26 +16,26 @@ namespace chip
         int carry = 0;
 
         tick_ += rhs.tick_;
-        if(tick_ > (TICKS_PER_WHOLE_NOTE / timeSignature_.division) )
+        while(tick_ > (TICKS_PER_WHOLE_NOTE / timeSignature_.division) )
         {
-            tick_ = 1;
-            carry = 1;
+            tick_ -= TICKS_PER_WHOLE_NOTE / timeSignature_.division;
+            carry++;
         }
 
         division_ += rhs.division_ + carry;
         carry = 0;
-        if(division_ > (timeSignature_.division / timeSignature_.noteValue) )
+        while(division_ > (timeSignature_.division / timeSignature_.noteValue) )
         {
-            division_ = 1;
-            carry = 1;
+            division_ -= timeSignature_.division / timeSignature_.noteValue;
+            carry++;
         }
 
         beat_ += rhs.beat_ + carry;
         carry = 0;
-        if(beat_ > timeSignature_.beats)
+        while(beat_ > timeSignature_.beats)
         {
-            beat_ = 1;
-            carry = 1;
+            beat_ -= timeSignature_.beats;
+            carry++;
         }
 
         bar_ += rhs.bar_ + carry;
