@@ -17,6 +17,8 @@ namespace chip
     class TimeValue
     {
     public:
+        TimeValue() : bar_(1), beat_(1), division_(1), tick_(1) {}
+
         /**
          * Constructs a time value.
          * @param _bar Bar number
@@ -46,6 +48,11 @@ namespace chip
          */
         bool operator<(const TimeValue& rhs) const;
 
+        bool operator>(const TimeValue& rhs) const
+        {
+            return rhs < *this && !(*this == rhs);
+        }
+
         /**
          * Increment the time value by one tick.
          * @return A reference to this TimeValue
@@ -58,6 +65,8 @@ namespace chip
          * @return A reference to this TimeValue
          */
         TimeValue& operator+=(const TimeValue& rhs);
+
+        TimeValue& operator-=(const TimeValue& rhs);
 
         const TimeValue operator+(const TimeValue& rhs) const
         {
