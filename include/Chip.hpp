@@ -5,6 +5,7 @@
 #ifndef CHIPAUDIO_CHIP_HPP
 #define CHIPAUDIO_CHIP_HPP
 
+#include <atomic>
 #include "Channel.hpp"
 #include "PortAudioHandler.hpp"
 
@@ -20,7 +21,7 @@ namespace chip
          * Constructs a chip with option to specify initial tempo.
          * @param initTempo Initial tempo (optional, default = 120)
          */
-        Chip(double initTempo = 120) : sampleCounter_(0)
+        Chip(double initTempo = 120) : sampleCounter_(0), masterTime_(chip::TimeValue() )
         {
             tempo(initTempo);
         }
@@ -74,6 +75,8 @@ namespace chip
             calculateSamplesPerTick();
         }
 
+        const double tempo() const { return tempo_; }
+
         /**
          * Set a new sample rate.
          * @param sampleRate New sample rate
@@ -83,6 +86,8 @@ namespace chip
             Module::sampleRate(sampleRate);
             calculateSamplesPerTick();
         }
+
+        const TimeValue masterTime() const { return masterTime_; }
 
     private:
         Sample generateNextSample();
@@ -97,6 +102,7 @@ namespace chip
         double tempo_;
         double samplesPerTick_;
         int sampleCounter_;
+        std::atomic<TimeValue> masterTime_;
 
         PortAudioHandler portAudioHandler_;
     };

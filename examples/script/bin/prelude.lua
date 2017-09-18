@@ -18,7 +18,7 @@ CHORDS =
 };
 
 chip = Chip.new();
-chip:tempo(88);
+chip:setTempo(88);
 
 for channelNum = 1, 2 do
 	channel = chip:addChannel();

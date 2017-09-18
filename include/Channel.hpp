@@ -9,6 +9,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include <atomic>
 #include "Pattern.hpp"
 #include "Module.hpp"
 #include "Oscillator.hpp"
@@ -16,6 +17,7 @@
 #include "Notes.hpp"
 #include "Sample.hpp"
 #include "SPSCRingBuffer.hpp"
+#include "MoveableAtomic.hpp"
 
 namespace chip
 {
@@ -43,7 +45,8 @@ namespace chip
          * Default constructor.
          */
         Channel()
-            : volume_(1), pan_(0), currentPattern_(0), loop_(0), loopStart_(0), consumePatterns_(0), output_(nullptr)
+            : volume_(1), pan_(0), currentPattern_(0), loop_(0), loopStart_(0), consumePatterns_(0), output_(nullptr),
+              enabled_(true)
         {
             for(int i = 0; i < INPUTS_TOTAL; i++)
             {
@@ -175,6 +178,22 @@ namespace chip
             }
         }
 
+        /**
+         * Clear all patterns and modules.
+         */
+        void clear()
+        {
+            patterns_.clear();
+            currentPattern_ = 0;
+            modules_.clear();
+            parameters_.clear();
+            oscillators_.clear();
+            output_ = nullptr;
+        }
+
+        const bool enabled() const { return enabled_; }
+        void enabled(bool enabled) { enabled_ = enabled; }
+
         const double& volume() const { return volume_; }
         void volume(double volume) { volume_ = volume; }
 
@@ -213,6 +232,8 @@ namespace chip
         Module* output_;
 
         SPSCRingBuffer<Pattern, 8> patternQueue_;
+
+        MoveableAtomic<bool> enabled_;
 
         double volume_;
         double pan_; //-1 for hard left, 1 for hard right, 0 center

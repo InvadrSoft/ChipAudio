@@ -230,10 +230,10 @@ OOLUA_PROXY(Chip)
     OOLUA_MFUNC(stop)
     OOLUA_MFUNC(addChannel)
     OOLUA_MFUNC(channel)
-    OOLUA_MFUNC(tempo)
+    OOLUA_MEM_FUNC_RENAME(setTempo, void, tempo, double)
     OOLUA_MFUNC(sampleRate)
 OOLUA_PROXY_END
-OOLUA_EXPORT_FUNCTIONS(Chip, start, pause, stop, addChannel, channel, tempo, sampleRate)
+OOLUA_EXPORT_FUNCTIONS(Chip, start, pause, stop, addChannel, channel, setTempo, sampleRate)
 OOLUA_EXPORT_FUNCTIONS_CONST(Chip)
 
 namespace chip

@@ -13,8 +13,13 @@ namespace chip
             sampleCounter_ = 0;
             for(Channel& channel : channels_)
             {
-                channel.processEvents();
+                if(channel.enabled() )
+                {
+                    channel.processEvents();
+                }
             }
+            chip::TimeValue currentMasterTime = masterTime_;
+            masterTime_ = ++currentMasterTime;
         }
         sampleCounter_++;
 
@@ -22,7 +27,10 @@ namespace chip
 
         for(Channel& channel : channels_)
         {
-            output += channel.generateNextSample();
+            if(channel.enabled() )
+            {
+                output += channel.generateNextSample();
+            }
         }
 
         return output;
