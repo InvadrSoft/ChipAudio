@@ -6,6 +6,7 @@
 #define CHIPAUDIO_VALUE_HPP
 
 #include "Module.hpp"
+#include "MoveableAtomic.hpp"
 
 namespace chip
 {
@@ -60,7 +61,7 @@ namespace chip
         double output() override { return value_; }
 
     private:
-        double value_;
+        MoveableAtomic<double> value_;
     };
 }
 
