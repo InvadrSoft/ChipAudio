@@ -68,13 +68,6 @@ namespace chip
 
         TimeValue& operator-=(const TimeValue& rhs);
 
-        const TimeValue operator+(const TimeValue& rhs) const
-        {
-            auto result = *this;
-            result += rhs;
-            return result;
-        }
-
         const unsigned int& bar() const { return bar_; }
         const unsigned int& beat() const { return beat_; }
         const unsigned int& division() const { return division_; }
@@ -87,5 +80,15 @@ namespace chip
         unsigned int bar_, beat_, division_, tick_;
         TimeSignature timeSignature_;
     };
+
+    inline TimeValue operator-(TimeValue lhs, const TimeValue &rhs)
+    {
+        return lhs -= rhs;
+    }
+
+    inline TimeValue operator+(TimeValue lhs, const TimeValue& rhs)
+    {
+        return lhs += rhs;
+    }
 }
 #endif //CHIPAUDIO_TIMEVALUE_HPP
