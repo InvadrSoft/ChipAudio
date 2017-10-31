@@ -21,7 +21,7 @@ namespace chip
          * Constructs a chip with option to specify initial tempo.
          * @param initTempo Initial tempo (optional, default = 120)
          */
-        Chip(double initTempo = 120) : sampleCounter_(0), masterTime_(chip::TimeValue() )
+        Chip(double initTempo = 120) : sampleCounter_(0), masterVolume_(1), masterTime_(chip::TimeValue() )
         {
             tempo(initTempo);
         }
@@ -89,6 +89,8 @@ namespace chip
 
         const TimeValue masterTime() const { return masterTime_; }
 
+        void masterVolume(double volume) { masterVolume_ = volume; }
+
     private:
         Sample generateNextSample();
 
@@ -99,6 +101,7 @@ namespace chip
 
         std::vector<Channel> channels_;
 
+        double masterVolume_;
         double tempo_;
         double samplesPerTick_;
         int sampleCounter_;

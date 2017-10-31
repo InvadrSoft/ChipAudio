@@ -33,6 +33,6 @@ namespace chip
             }
         }
 
-        return output;
+        return output * masterVolume_;
     }
 }

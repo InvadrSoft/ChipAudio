@@ -22,6 +22,14 @@ struct Sample
         right += rhs.right;
         return *this;
     }
+
+    Sample operator*(double rhs)
+    {
+        Sample result;
+        result.left = left * rhs;
+        result.right = right * rhs;
+        return result;
+    }
 };
 
 #endif //CHIPAUDIO_SAMPLE_HPP
