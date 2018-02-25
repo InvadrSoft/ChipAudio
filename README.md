@@ -22,11 +22,4 @@ Most projects using the library should include both of these headers. Projects r
 ChipAudio requires the PortAudio (http://www.portaudio.com/) library. In order to use the Lua script functionality, OOLua (https://oolua.org/) is
 also required as well as a suitable version of Lua (Lua, LuaJIT etc.).
 
-# Class Diagram
-
-![Class Diagram](http://invadrsoft.co.uk/img/class.png)
-
-# Example Module Chain 
-
-![Example Module Chain](http://invadrsoft.co.uk/img/chain.png)
 
