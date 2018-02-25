@@ -10,6 +10,7 @@
 #include <map>
 #include <memory>
 #include <atomic>
+#include "ModuleChain.hpp"
 #include "Pattern.hpp"
 #include "Module.hpp"
 #include "Oscillator.hpp"
@@ -30,29 +31,10 @@ namespace chip
 
     public:
         /**
-         * Enumeration of all available input modules on this channel.
-         */
-        enum InputModule
-        {
-            NOTE_FREQ,
-            NOTE_NUMBER,
-            GATE_IN,
-            NEW_NOTE,
-            INPUTS_TOTAL
-        };
-
-        /**
          * Default constructor.
          */
-        Channel()
-            : volume_(1), pan_(0), currentPattern_(0), loop_(0), loopStart_(0), consumePatterns_(0), output_(nullptr),
-              enabled_(true)
-        {
-            for(int i = 0; i < INPUTS_TOTAL; i++)
-            {
-                inputs_.push_back(Value() );
-            }
-        }
+        Channel() : volume_(1), pan_(0), currentPattern_(0), loop_(0), loopStart_(0), consumePatterns_(0),
+                    enabled_(true) {}
 
         Channel(Channel&&) = default;
 
@@ -126,8 +108,7 @@ namespace chip
          */
         Module& addModule(Module* module)
         {
-            modules_.push_back(std::unique_ptr<Module>(module) );
-            return *modules_.back();
+            return moduleChain_.addModule(module);
         }
 
         /**
@@ -138,8 +119,7 @@ namespace chip
          */
         Value& addParameter(Value parameter, std::string name)
         {
-            auto result = parameters_.emplace(name, std::move(parameter) );
-            return result.first->second;
+            return moduleChain_.addParameter(parameter, name);
         }
 
         /**
@@ -149,8 +129,7 @@ namespace chip
          */
         Oscillator& addOscillator(Oscillator* oscillator)
         {
-            oscillators_.push_back(std::unique_ptr<Oscillator>(oscillator) );
-            return *oscillators_.back();
+            return moduleChain_.addOscillator(oscillator);
         }
 
         /**
@@ -158,13 +137,13 @@ namespace chip
          * @param input Input module index
          * @return A reference to the specified input module
          */
-        Value& input(InputModule input) { return inputs_[input]; }
+        Value& input(ModuleChain::InputModule input) { return moduleChain_.input(input); }
 
         /**
          * Sets the output module of the channel.
          * @param module Pointer to module to use as output
          */
-        void output(Module* module) { output_ = module; }
+        void output(Module* module) { moduleChain_.output(module); }
 
         /**
          * Reset playback to beginning of pattern list.
@@ -185,10 +164,7 @@ namespace chip
         {
             patterns_.clear();
             currentPattern_ = 0;
-            modules_.clear();
-            parameters_.clear();
-            oscillators_.clear();
-            output_ = nullptr;
+            moduleChain_.clear();
         }
 
         const bool enabled() const { return enabled_; }
@@ -219,17 +195,15 @@ namespace chip
 
         bool noPatterns() { return patterns_.empty(); }
 
+        ModuleChain& moduleChain() { return moduleChain_; }
+
     private:
         void processEvents();
         Sample generateNextSample();
 
         std::deque<Pattern> patterns_;
 
-        std::vector<std::unique_ptr<Module> > modules_;
-        std::vector<Value> inputs_;
-        std::map<std::string, Value> parameters_;
-        std::vector<std::unique_ptr<Oscillator> > oscillators_;
-        Module* output_;
+        ModuleChain moduleChain_;
 
         SPSCRingBuffer<Pattern, 8> patternQueue_;
 

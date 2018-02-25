@@ -36,12 +36,12 @@ for channelNum = 1, 2 do
 
 	oscillator = channel:addOscillator(newOscillator(wavetable, Oscillator.COSINE) );
 	channel:output(oscillator)
-	moduleInput(oscillator, Oscillator.FREQUENCY, channel:input(Channel.NOTE_FREQ) );
+	moduleInput(oscillator, Oscillator.FREQUENCY, channel:input(ModuleChain.NOTE_FREQ) );
 
 	envelope = channel:addModule(newEnvelope() );
 	moduleInput(oscillator, Oscillator.AMPLITUDE, envelope);
 
-	moduleInput(envelope, EnvelopeADSR.GATE, channel:input(Channel.GATE_IN) );
+	moduleInput(envelope, EnvelopeADSR.GATE, channel:input(ModuleChain.GATE_IN) );
 
 	attack = channel:addParameter(Value.new(0.001), "attack");
 	moduleInput(envelope, EnvelopeADSR.ATTACK, attack);

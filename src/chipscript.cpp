@@ -189,7 +189,7 @@ OOLUA_PROXY_END
 OOLUA_EXPORT_FUNCTIONS(NoteToFrequency)
 OOLUA_EXPORT_FUNCTIONS_CONST(NoteToFrequency)
 
-OOLUA_PROXY(Channel)
+OOLUA_PROXY(ModuleChain)
     OOLUA_TAGS(Register_class_enums)
     OOLUA_ENUMS(
         OOLUA_ENUM(NOTE_FREQ)
@@ -197,6 +197,11 @@ OOLUA_PROXY(Channel)
         OOLUA_ENUM(GATE_IN)
         OOLUA_ENUM(NEW_NOTE)
     )
+OOLUA_PROXY_END
+OOLUA_EXPORT_FUNCTIONS(ModuleChain)
+OOLUA_EXPORT_FUNCTIONS_CONST(ModuleChain)
+
+OOLUA_PROXY(Channel)
     OOLUA_MEM_FUNC(Pattern &, addPattern, Pattern)
     OOLUA_MEM_FUNC_RENAME(addPatternAt, Pattern &, addPattern, Pattern, int)
     OOLUA_MFUNC(removeFirstPattern)
@@ -320,6 +325,7 @@ namespace chip
         lua.register_class<Invert>();
         lua.register_class<NoteToFrequency>();
 
+        lua.register_class<ModuleChain>();
         lua.register_class<Channel>();
         lua.register_class<Chip>();
 
