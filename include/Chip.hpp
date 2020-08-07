@@ -99,7 +99,7 @@ namespace chip
             samplesPerTick_ = Module::sampleRate() /  ( (tempo_ / 60) * (TICKS_PER_WHOLE_NOTE / 4.0) );
         }
 
-        std::vector<Channel> channels_;
+        std::deque<Channel> channels_;
 
         double masterVolume_;
         double tempo_;
