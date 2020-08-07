@@ -32,13 +32,14 @@ namespace chip
          * @param _value Event value (optional)
          * @param _paramID ID of parameter (optional)
          */
-        Event(EventType _type, int _note = 0, int _value = 0, std::string _paramID = "")
+        Event(EventType _type, int _note = 0, double _value = 0, std::string _paramID = "")
                 : note(_note), value(_value), type(_type), paramID(_paramID) {}
-        Event(int _type, int _note, int _value, std::string _paramID = "")
+        Event(int _type, int _note, double _value, std::string _paramID = "")
                 : type(static_cast<EventType>(_type) ), value(_value), note(_note), paramID(_paramID) {}
 
         EventType type;
-        int note, value;
+        int note;
+        double value;
         std::string paramID;
     };
 
