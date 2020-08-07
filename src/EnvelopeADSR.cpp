@@ -14,6 +14,7 @@ namespace chip
         if( (gate > 0 && lastGateValue_ == 0 ) ||
             (input(RESTART) != nullptr && input(RESTART)->output() > 0) ) //rising edge
         {
+            lastSignalValue_ = 0;
             double attack = (input(ATTACK) == nullptr) ? 0 : input(ATTACK)->output() * sampleRate();
             if(attack < gate)
             {
