@@ -18,6 +18,7 @@ namespace chip
         enum Inputs
         {
             TRIGGER,
+            VELOCITY,
             INPUTS_TOTAL
         };
 
@@ -30,6 +31,7 @@ namespace chip
             if(trigger > 0)
             {
                 currentSample_ = 0;
+                velocity_ = (input(VELOCITY) == nullptr) ? 1 : input(VELOCITY)->output();
             }
             double output = 0;
             if(currentSample_ < sampleCount_)
@@ -37,13 +39,14 @@ namespace chip
                 output = samples_[currentSample_];
                 currentSample_++;
             }
-            return output;
+            return output * velocity_;
         }
 
     private:
         const double* samples_;
         size_t sampleCount_;
         size_t currentSample_;
+        double velocity_;
     };
 }
 
