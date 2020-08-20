@@ -34,7 +34,7 @@ namespace chip
          * Default constructor.
          */
         Channel() : volume_(1), pan_(0), currentPattern_(0), loop_(0), loopStart_(0), consumePatterns_(0),
-                    enabled_(true) {}
+                    enabled_(true), autoDisable_(false), silentSamples_(0) {}
 
         Channel(Channel&&) = default;
 
@@ -170,6 +170,9 @@ namespace chip
         const bool enabled() const { return enabled_; }
         void enabled(bool enabled) { enabled_ = enabled; }
 
+        const bool autoDisable() const { return autoDisable_; }
+        void autoDisable(bool autoDisable) { autoDisable_ = autoDisable; }
+
         const double& volume() const { return volume_; }
         void volume(double volume) { volume_ = volume; }
 
@@ -215,6 +218,8 @@ namespace chip
         bool loop_;
         unsigned int loopStart_; //index of pattern
         bool consumePatterns_;
+        bool autoDisable_;
+        unsigned int silentSamples_;
     };
 }
 

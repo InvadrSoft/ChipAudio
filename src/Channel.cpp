@@ -8,8 +8,24 @@ namespace chip
 {
     Sample Channel::generateNextSample()
     {
+        static constexpr auto SILENCE_THRESHOLD = 0.000001;
+        static constexpr auto MAX_SILENT_SAMPLES = 1024;
+
         double output = moduleChain_.output() * volume_;
         moduleChain_.input(ModuleChain::NEW_NOTE) = 0;
+
+        if(autoDisable_)
+        {
+            if(output <= SILENCE_THRESHOLD && output >= -SILENCE_THRESHOLD)
+            {
+                if(++silentSamples_ >= MAX_SILENT_SAMPLES)
+                {
+                    enabled_ = false;
+                    silentSamples_ = 0;
+                }
+            }
+        }
+
         if(pan_ <= 0)
         {
             return Sample(output * (pan_ + 1), output);
