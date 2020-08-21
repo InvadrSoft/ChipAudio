@@ -33,6 +33,6 @@ namespace chip
             }
         }
 
-        return output * masterVolume_;
+        return masterEffects_.process(output) * masterVolume_;
     }
 }

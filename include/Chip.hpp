@@ -8,6 +8,7 @@
 #include <atomic>
 #include "Channel.hpp"
 #include "PortAudioHandler.hpp"
+#include "StereoEffectChannel.hpp"
 
 namespace chip
 {
@@ -91,6 +92,8 @@ namespace chip
 
         void masterVolume(double volume) { masterVolume_ = volume; }
 
+        StereoEffectChannel& masterEffects() { return masterEffects_; }
+
     private:
         Sample generateNextSample();
 
@@ -100,6 +103,8 @@ namespace chip
         }
 
         std::deque<Channel> channels_;
+
+        StereoEffectChannel masterEffects_;
 
         double masterVolume_;
         double tempo_;
