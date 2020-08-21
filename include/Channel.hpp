@@ -18,6 +18,7 @@
 #include "Notes.hpp"
 #include "Sample.hpp"
 #include "SPSCRingBuffer.hpp"
+#include "StereoEffectChannel.hpp"
 #include "MoveableAtomic.hpp"
 
 namespace chip
@@ -200,6 +201,14 @@ namespace chip
 
         ModuleChain& moduleChain() { return moduleChain_; }
 
+        struct Send
+        {
+            float amount;
+            StereoEffectChannel* channel;
+        };
+
+        void addSend(Send send) { sends_.emplace_back(send); }
+
     private:
         void processEvents();
         Sample generateNextSample();
@@ -207,6 +216,8 @@ namespace chip
         std::deque<Pattern> patterns_;
 
         ModuleChain moduleChain_;
+
+        std::deque<Send> sends_;
 
         SPSCRingBuffer<Pattern, 8> patternQueue_;
 

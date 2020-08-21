@@ -33,6 +33,11 @@ namespace chip
             }
         }
 
+        for(StereoEffectChannel& sendChannel : sendChannels_)
+        {
+            output += sendChannel.process();
+        }
+
         return masterEffects_.process(output) * masterVolume_;
     }
 }

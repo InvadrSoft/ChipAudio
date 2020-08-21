@@ -26,6 +26,12 @@ namespace chip
             }
         }
 
+        for(auto& send : sends_)
+        {
+            send.channel->input(StereoEffectChannel::LEFT_CHANNEL) += output * send.amount;
+            send.channel->input(StereoEffectChannel::RIGHT_CHANNEL) += output * send.amount;
+        }
+
         if(pan_ <= 0)
         {
             return Sample(output * (pan_ + 1), output);

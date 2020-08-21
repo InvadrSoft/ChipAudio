@@ -94,6 +94,14 @@ namespace chip
 
         StereoEffectChannel& masterEffects() { return masterEffects_; }
 
+        StereoEffectChannel& addSendChannel()
+        {
+            sendChannels_.emplace_back(StereoEffectChannel() );
+            return sendChannels_.back();
+        }
+
+        double samplesPerTick() { return samplesPerTick_; }
+
     private:
         Sample generateNextSample();
 
@@ -103,6 +111,7 @@ namespace chip
         }
 
         std::deque<Channel> channels_;
+        std::deque<StereoEffectChannel> sendChannels_;
 
         StereoEffectChannel masterEffects_;
 

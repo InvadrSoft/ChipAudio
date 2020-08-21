@@ -54,6 +54,12 @@ namespace chip
             return *this;
         }
 
+        Value& operator+=(double rhs)
+        {
+            value_ = value_ + rhs;
+            return *this;
+        }
+
         /**
          * Output the stored value.
          * @return The stored value

@@ -20,10 +20,10 @@ namespace chip
 
         StereoEffectChannel() : outputs_({nullptr, nullptr}) {}
 
-        Module& addModule(Module* module, Channel channel)
+        Module& addModule(Module* module)
         {
-            moduleLists_[channel].push_back(std::unique_ptr<Module>(module) );
-            return *moduleLists_[channel].back();
+            moduleList.push_back(std::unique_ptr<Module>(module) );
+            return *moduleList.back();
         }
 
         void output(Module* module, Channel channel) { outputs_[channel] = module; }
@@ -40,9 +40,19 @@ namespace chip
             };
         }
 
+        Sample process()
+        {
+            Sample output {
+                outputs_[LEFT_CHANNEL] == nullptr ? inputs_[LEFT_CHANNEL].output() : outputs_[LEFT_CHANNEL]->output(),
+                outputs_[RIGHT_CHANNEL] == nullptr ? inputs_[RIGHT_CHANNEL].output() : outputs_[RIGHT_CHANNEL]->output()
+            };
+            inputs_[LEFT_CHANNEL] = inputs_[RIGHT_CHANNEL] = 0;
+            return output;
+        }
+
     private:
         using ModuleList = std::vector<std::unique_ptr<Module> >;
-        std::array<ModuleList, 2> moduleLists_;
+        ModuleList moduleList;
         std::array<Module*, 2> outputs_;
         std::array<Value, 2> inputs_;
     };
