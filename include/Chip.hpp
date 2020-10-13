@@ -115,7 +115,7 @@ namespace chip
 
         StereoEffectChannel masterEffects_;
 
-        double masterVolume_;
+        std::atomic<double> masterVolume_;
         double tempo_;
         double samplesPerTick_;
         int sampleCounter_;
