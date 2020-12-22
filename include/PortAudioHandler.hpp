@@ -32,6 +32,8 @@ namespace chip
 
         void stop();
 
+        bool highLoad();
+
         static int paCallback(const void *inputBuffer, void *outputBuffer,
                               unsigned long framesPerBuffer,
                               const PaStreamCallbackTimeInfo *timeInfo,
@@ -43,6 +45,7 @@ namespace chip
 
         PaStream *stream;
         std::function<Sample()> nextSampleFunction;
+        double previousLoad;
     };
 
 }

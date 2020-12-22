@@ -8,7 +8,7 @@
 namespace chip
 {
 
-    PortAudioHandler::PortAudioHandler()
+    PortAudioHandler::PortAudioHandler() : previousLoad(0)
     {
         PaError err = Pa_Initialize();
         if( err != paNoError )
@@ -66,6 +66,14 @@ namespace chip
         {
             throw PAException();
         }
+    }
+
+    bool PortAudioHandler::highLoad()
+    {
+        auto load = Pa_GetStreamCpuLoad(stream);
+        if (load == previousLoad) return false;
+        previousLoad = load;
+        return load > 0.9;
     }
 
     int PortAudioHandler::paCallbackMethod(const void *inputBuffer, void *outputBuffer,

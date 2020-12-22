@@ -25,9 +25,16 @@ namespace chip
 
         Sample output;
 
+        bool highLoad = portAudioHandler_.highLoad();
+
         for(Channel& channel : channels_)
         {
-            if(channel.enabled() )
+            if(highLoad && channel.enabled() && channel.autoDisable() )
+            {
+                channel.enabled(false);
+                highLoad = false;
+            }
+            else if(channel.enabled() )
             {
                 output += channel.generateNextSample();
             }
